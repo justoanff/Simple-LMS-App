@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:insert="~{fragments/headerinc :: head}"></th:block>
+    <title>Course Registration</title>
+</head>
+<body>
+<th:block th:insert="~{fragments/header :: header}"></th:block>
+<div class="container-fluid">
+    <div class="text-center">
+        <h2 th:inline="text">Welcome, [[${remoteUser}]]!</h2>
+        <span>Course Registration</span>
+    </div>
+</div>
+</body>
+</html>
