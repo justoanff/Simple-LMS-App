@@ -11,7 +11,7 @@
                 <ul class="nav navbar-nav menu-list">
                     <li class="menu-item"><a href="#" th:href="@{/}">Home</a></li>
                     <li class="menu-item"><a href="#" th:href="@{/students}">Students</a></li>
-                    <li class="menu-item"><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/courses}">Courses</a>
+                    <li class="menu-item"><a  th:href="@{/courses}">Courses</a>
                     </li>
                     <li class="menu-item"><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users}">Users</a></li>
                 </ul>

@@ -16,7 +16,7 @@
             <th>Email</th>
             <th>Department</th>
             <th>Courses</th>
-            <th class="text-center">Actions</th>
+            <th sec:authorize="hasAuthority('ADMIN')" class="text-center">Actions</th>
         </tr>
         <tr th:each="student : ${students}">
             <td th:text="${student.firstName} + ' ' + ${student.lastName}"></td>
@@ -27,14 +27,14 @@
                             <span th:text="${course.name}"/><th:block th:if="${!iterStat.last}">,</th:block>
                         </span>
             </td>
-            <td class="col-actions">
-                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/addStudentCourse/{id}(id=${student.id})}"
+            <td sec:authorize="hasAuthority('ADMIN')" class="col-actions">
+                <a th:href="@{/addStudentCourse/{id}(id=${student.id})}"
                    class="btn btn-default"><i
                         class="fa fa-plus"></i> Course</a>
-                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/student/edit/{id}(id=${student.id})}"
+                <a th:href="@{/student/edit/{id}(id=${student.id})}"
                    class="btn btn-primary"><i class="fa fa-edit"></i>
                     Edit</a>
-                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/student/delete/{id}(id=${student.id})}"
+                <a th:href="@{/student/delete/{id}(id=${student.id})}"
                    onclick="return confirm('Are you sure you want to remove?')" class="btn btn-danger"><i
                         class="fa fa-trash"></i> Delete</a>
             </td>

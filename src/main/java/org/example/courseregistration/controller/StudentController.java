@@ -123,6 +123,13 @@ public class StudentController {
         if (student == null || course == null) {
             return "error";
         }
+        // Check if the student is already enrolled in the course
+        if (student.getCourses().contains(course)) {
+            model.addAttribute("error", "Student is already enrolled in this course");
+            model.addAttribute("student", student);
+            model.addAttribute("courses", courseRepository.findAll());
+            return "addStudentCourse"; // Redirect back to the course adding form with an error message
+        }
         course.addStudent(student);
         courseRepository.save(course);
         studentRepository.save(student);
