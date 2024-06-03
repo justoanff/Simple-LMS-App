@@ -108,7 +108,7 @@ public class StudentController {
     }
 
     @RequestMapping("addStudentCourse/{id}")
-    public String addStudentCourse(@PathVariable("id") Long id, Model model) {
+    public String showFormAddStudentCourse(@PathVariable("id") Long id, Model model) {
         Student student = studentRepository.findById(id).orElse(null);
         model.addAttribute("student", student);
         List<Course> courses = courseRepository.findAll();
