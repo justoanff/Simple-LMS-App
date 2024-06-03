@@ -5,6 +5,7 @@ import org.example.courseregistration.entity.User;
 import org.example.courseregistration.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,25 +27,29 @@ public class UserController {
             return "userForm";
         }
 
-        if (user.getPassword() != null) {
-            // encrypt password
-            userService.encryptPassword(user);
-        }
-
-        if (userId == null) { // check if new user
-            User existingUser = userService.findByUsername(user.getUsername());
-            if (existingUser != null) { // validate username
-                bindingResult.rejectValue("username", "error.userexists", "Username already exists");
-                model.addAttribute("title", "Add User");
-                return "userForm";
+        try {
+            if (user.getPassword() != null) {
+                // encrypt password
+                userService.encryptPassword(user);
             }
+
+            if (userId == null) { // check if new user
+                User existingUser = userService.findByUsername(user.getUsername());
+                if (existingUser != null) { // validate username
+                    bindingResult.rejectValue("username", "error.userexists", "Username already exists");
+                    model.addAttribute("title", "Add User");
+                    return "userForm";
+                }
+            }
+
+            userService.saveUser(user);
+            return "redirect:/users";
+        } catch (DataIntegrityViolationException e) {
+            bindingResult.rejectValue("username", "error.userexists", "Username already exists");
+            model.addAttribute("title", "Add User");
+            return "userForm";
         }
-
-        userService.saveUser(user);
-        return "redirect:/users";
     }
-
-
 
     @RequestMapping("users")
     public String index(Model model) {
