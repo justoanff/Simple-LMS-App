@@ -21,6 +21,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/css/**", "/fonts/**", "/signup", "/saveSignup").permitAll()
+                        .requestMatchers("/students", "/courses").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers("/student/**", "/course/**", "/user/**", "/users/**", "/addStudentCourse/**", "/saveStudent", "/saveCourse", "/saveUser").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -29,6 +31,10 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll
+                )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .accessDeniedPage("/access-denied")
                 );
         return http.build();
     }
