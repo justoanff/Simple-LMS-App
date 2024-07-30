@@ -6,7 +6,8 @@
 -- Generation Time: 12-Nov-2018 às 03:16
 -- Versão do servidor: 5.7.21
 -- PHP Version: 7.2.4
-
+CREATE Database spring_course;
+use spring_course;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
