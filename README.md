@@ -58,6 +58,7 @@ This project is a comprehensive Learning Management System (LMS) designed to str
 5. The application should now be running.
 
 6. Open a web browser and navigate to http://localhost:8080
+   - Account to test application: admin (username: admin, password: admin), normal user(username: user, password: user).
 
 ## Usage
 
