@@ -66,4 +66,4 @@ This project is a comprehensive Learning Management System (LMS) designed to str
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
